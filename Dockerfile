@@ -25,13 +25,16 @@ RUN mkdir -p $TERMINUS_PLUGINS_DIR \
 	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1 \
 	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-site-clone-plugin:^1
 
-ENV PATH="${PATH}:/usr/local/share/terminus/vendor/bin"
+ENV PATH $PATH:/usr/local/share/terminus/vendor/bin
 
-### npm for linting tools
+### npm for theme build + js linting tools
 RUN apk upgrade --update --no-cache && apk add --update \
     bash \
     nodejs \
     nodejs-npm
+
+### gulp for patternlab theme build
+RUN npm install --global gulp@^3.9.1
 
 ### linting tools
 ## (revisions based on npm info "eslint-config-airbnb@latest" peerDependencies)
