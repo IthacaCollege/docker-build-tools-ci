@@ -25,6 +25,8 @@ RUN mkdir -p $TERMINUS_PLUGINS_DIR \
 	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1 \
 	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-site-clone-plugin:^1
 
+ENV PATH="${PATH}:/usr/local/share/terminus/vendor/bin"
+
 ### npm for linting tools
 RUN apk upgrade --update --no-cache && apk add --update \
     bash \
