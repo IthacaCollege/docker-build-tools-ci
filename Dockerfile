@@ -4,11 +4,19 @@ MAINTAINER Eric Woods <ewoods@ithaca.edu>
 WORKDIR /build-tools-ci
 ADD . /build-tools-ci
 
+### core tools and config
+RUN apk upgrade --update --no-cache && apk add --update \
+    bash
+
+RUN mkdir -p $HOME/.ssh \
+    && echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+
 ### be fast...
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
 
 ### terminus
 ENV TERMINUS_VERSION 1.8.1
+ENV TERMINUS_HIDE_UPDATE_MESSAGE 1
 ENV TERMINUS_DIR /usr/local/share/terminus
 ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
@@ -19,22 +27,17 @@ RUN mkdir -p $TERMINUS_PLUGINS_DIR \
     && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:^1 \
     && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-secrets-plugin:^1 \
     && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-rsync-plugin:^1 \
-	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1 \
-	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1 \
-	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1 \
-	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1 \
-	&& composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-site-clone-plugin:^1
+    && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1 \
+    && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1 \
+    && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1 \
+    && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1 \
+    && composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-site-clone-plugin:^1
 
 ENV PATH $PATH:/usr/local/share/terminus/vendor/bin
 
-### npm for theme build + js linting tools
-RUN apk upgrade --update --no-cache && apk add --update \
-    bash \
-    nodejs \
-    nodejs-npm
-
-### gulp for patternlab theme build
-RUN npm install --global gulp@^3.9.1
+### npm + gulp for theme build + js linting tools
+RUN apk add --update nodejs nodejs-npm \
+    && npm install --global gulp@^3.9.1
 
 ### linting tools
 ## (revisions based on npm info "eslint-config-airbnb@latest" peerDependencies)
