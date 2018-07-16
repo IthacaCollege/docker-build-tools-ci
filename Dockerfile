@@ -8,9 +8,13 @@ ADD . /build-tools-ci
 RUN apk upgrade --update --no-cache && apk add --update --no-cache \
     bash
 
+# emulsify-gulp install issue with npm module triggers build from source needing python + make + g++
+# pattern-lab post-install issue fails, needing libarchive-tools for tar
 RUN apk add --update --no-cache \
-    python make g++
+    python make g++ \
+    libarchive-tools
 
+# pantheon terminus ssh has
 RUN mkdir -p $HOME/.ssh \
     && echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
 
