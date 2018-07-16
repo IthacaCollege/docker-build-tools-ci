@@ -5,8 +5,11 @@ WORKDIR /build-tools-ci
 ADD . /build-tools-ci
 
 ### core tools and config
-RUN apk upgrade --update --no-cache && apk add --update \
+RUN apk upgrade --update --no-cache && apk add --update --no-cache \
     bash
+
+RUN apk add --update --no-cache \
+    python make g++
 
 RUN mkdir -p $HOME/.ssh \
     && echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
