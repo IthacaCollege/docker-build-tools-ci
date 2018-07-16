@@ -58,7 +58,7 @@ RUN npm install --global eslint@^4.19.1 \
 ### patternlab components
 ENV PATTERNLAB_BUILD_DIR /build-tools-ci/pattern-lab-sources
 
-RUN mkdir -p $PATTERNLAB_BUILD_DIR \
-    && composer -n create-project -d $PATTERNLAB_BUILD_DIR pattern-lab/edition-twig-standard:^2.2.1 \
-    && composer -n create-project -d $PATTERNLAB_BUILD_DIR drupal-pattern-lab/bem-twig-extension:^1.0.1 \
-    && composer -n create-project -d $PATTERNLAB_BUILD_DIR drupal-pattern-lab/add-attributes-twig-extension:^1.0.1
+RUN mkdir -p $PATTERNLAB_BUILD_DIR && cd $PATTERNLAB_BUILD_DIR \
+    && composer -n create-project pattern-lab/edition-twig-standard:^2.2.1 pattern-lab \
+    && composer -n create-project drupal-pattern-lab/bem-twig-extension:^1.0.1 \
+    && composer -n create-project drupal-pattern-lab/add-attributes-twig-extension:^1.0.1
