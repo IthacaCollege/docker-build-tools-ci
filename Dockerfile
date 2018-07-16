@@ -14,6 +14,8 @@ RUN apk add --update --no-cache \
     python make g++ \
     libarchive-tools
 
+ENV TZ /usr/share/zoneinfo/America/New_York
+
 # pantheon terminus ssh has
 RUN mkdir -p $HOME/.ssh \
     && echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
