@@ -54,3 +54,11 @@ RUN npm install --global eslint@^4.19.1 \
     && npm install --global eslint-plugin-react@^7.9.1 \
     && npm install --global eslint-config-airbnb@^17.0.0 \
     && npm cache clean --force
+
+### patternlab components
+ENV PATTERNLAB_BUILD_DIR /build-tools-ci/pattern-lab-sources
+
+RUN mkdir -p $PATTERNLAB_BUILD_DIR \
+    && composer -n create-project -d $PATTERNLAB_BUILD_DIR pattern-lab/edition-twig-standard:^2.2.1 \
+    && composer -n create-project -d $PATTERNLAB_BUILD_DIR drupal-pattern-lab/bem-twig-extension:^1.0.1 \
+    && composer -n create-project -d $PATTERNLAB_BUILD_DIR drupal-pattern-lab/add-attributes-twig-extension:^1.0.1
