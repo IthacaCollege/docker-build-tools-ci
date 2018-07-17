@@ -6,7 +6,7 @@ ADD . /build-tools-ci
 
 ### core tools and config
 RUN apk upgrade --update --no-cache && apk add --update --no-cache \
-    bash
+    bash \
     patch
 
 # emulsify-gulp install issue with npm module triggers build from source needing python + make + g++
