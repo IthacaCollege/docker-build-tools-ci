@@ -1,4 +1,4 @@
-FROM drupaldocker/php:7.0-cli-2.x
+FROM drupaldocker/php:7.1-cli-2.x
 MAINTAINER Eric Woods <ewoods@ithaca.edu>
 
 WORKDIR /build-tools-ci
