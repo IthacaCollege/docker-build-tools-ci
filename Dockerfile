@@ -7,6 +7,7 @@ ADD . /build-tools-ci
 ### core tools and config
 RUN apk upgrade --update --no-cache && apk add --update --no-cache \
     bash
+    patch
 
 # emulsify-gulp install issue with npm module triggers build from source needing python + make + g++
 # pattern-lab post-install issue fails, needing libarchive-tools for tar
@@ -15,6 +16,9 @@ RUN apk add --update --no-cache \
     libarchive-tools
 
 ENV TZ /usr/share/zoneinfo/America/New_York
+
+# stops CI from converting source files when deploying with git commit
+RUN git config --global core.autocrlf false
 
 # pantheon terminus ssh has
 RUN mkdir -p $HOME/.ssh \
