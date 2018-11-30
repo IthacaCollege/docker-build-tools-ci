@@ -1,4 +1,4 @@
-FROM drupaldocker/php:7.0-cli-2.x
+FROM drupaldocker/php:7.1-cli-2.x
 MAINTAINER Eric Woods <ewoods@ithaca.edu>
 
 WORKDIR /build-tools-ci
@@ -28,7 +28,7 @@ RUN mkdir -p $HOME/.ssh \
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
 
 ### terminus
-ENV TERMINUS_VERSION 1.8.1
+ENV TERMINUS_VERSION 1.9.0
 ENV TERMINUS_HIDE_UPDATE_MESSAGE 1
 ENV TERMINUS_DIR /usr/local/share/terminus
 ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
