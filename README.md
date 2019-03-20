@@ -21,3 +21,6 @@ This is the source Dockerfile for the [ithacacollege/www-ithaca-ci](https://quay
 - NPM (latest)
 - Gulp
 - ESLint
+
+## Build It with Quay
+Log in to Quay, go to the www-ithaca-ci repository and click on [builds](https://quay.io/repository/ithacacollege/www-ithaca-ci?tab=builds), then click on "> Start New Build" and upload the file.
