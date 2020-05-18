@@ -38,6 +38,8 @@ RUN . /etc/profile.d/nvm.sh; \
     && composer clearcache \
     && apk del .dd-build-deps; \
     else \
-    npm install --global yarn \
-    && npm cache clean --force; \
+    apk add --update --no-cache autoconf automake g++ make \
+    && npm install --global yarn \
+    && npm cache clean --force \
+    && ln -s $(which yarn) /usr/local/bin/; \
     fi
