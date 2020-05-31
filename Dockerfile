@@ -1,4 +1,4 @@
-FROM quay.io/ithacacollege/terminus-ci:2.3
+FROM ithaca.azurecr.io/ithacacollege/terminus-ci:2.3
 
 ENV TZ /usr/share/zoneinfo/America/New_York
 RUN echo '. /etc/profile' >> /root/.bashrc
